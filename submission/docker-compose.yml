@@ -1,0 +1,15 @@
+version: '3'
+services:
+  wrapper:
+    image: autogluon.fda.submission:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./dataset:/root/src/app/dataset
+      - ./model:/root/src/app/model
+      - ./output:/root/src/app/output
+    environment:
+      DATASET: "./dataset/fda_proteomic_gender_trial_1.zip" # dataset name
+      ID_COLUMN: "sample" # will be used when joining multiple input files to create dataframe
+      TARGET_COLUMN: "gender" # column name representing what we are predicting
